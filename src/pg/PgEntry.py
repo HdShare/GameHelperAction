@@ -182,7 +182,7 @@ def gift_receive(gift_id, gift_title):
 
 def entry():
     print("#########################################################")
-    print(f"# 和平营地 #{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"# 和平营地 # {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     signin()
     do_like_records()
     do_task_list()

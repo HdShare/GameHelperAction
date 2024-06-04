@@ -74,15 +74,16 @@ def do_task_reward():
             task_package_status = task["packageStatus"]
             if task_finish_status == 1 and task_package_status == 0:
                 task_ids.append(task_id)
-        if HttpApi.task_reward(task_ids) is not None:
-            print(f">领取成功: {len(task_ids)}")
-        else:
-            print(f">领取失败: {len(task_ids)}")
+        if len(task_ids) > 0:
+            if HttpApi.task_reward(task_ids) is not None:
+                print(f">领取成功: {len(task_ids)}")
+            else:
+                print(f">领取失败: {len(task_ids)}")
 
 
 def entry():
     print("#########################################################")
-    print(f"# 王者营地 #{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"# 王者营地 # {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     do_task_list()
     do_task_reward()
     print("#########################################################")
