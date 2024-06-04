@@ -1,0 +1,50 @@
+name: Python
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 16 * * *'
+
+jobs:
+  Python:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Set TimeZone'
+        uses: szenius/set-timezone@v2.0
+        with:
+          timezoneLinux: "Asia/Shanghai"
+
+      - name: 'Checkout'
+        uses: actions/checkout@v4
+
+      - name: 'Setup Python'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: 'Install Requirements'
+        run: pip install -r src/requirements.txt
+
+      - name: 'Run Script'
+        run: python src/main.py >> log/run.log
+        env:
+          pg_appid: ${{ secrets.appid }}
+          pg_msdkEncodeParam: ${{ secrets.msdkEncodeParam }}
+          pg_openid: ${{ secrets.openid }}
+          pg_sig: ${{ secrets.sig }}
+          pg_timestamp: ${{ secrets.timestamp }}
+          pg_roleId: ${{ secrets.roleId }}
+          pg_userId: ${{ secrets.userId }}
+          pg_token: ${{ secrets.token }}
+          smoba_roleId: ${{ secrets.roleId }}
+          smoba_userId: ${{ secrets.userId }}
+          smoba_token: ${{ secrets.token }}
+
+      - name: 'Auto Commit'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          branch: master
+          file_pattern: log/run.log
+          commit_message: update run.log
+          commit_user_name: GitHub Actions
+          commit_user_email: actions@github.com
