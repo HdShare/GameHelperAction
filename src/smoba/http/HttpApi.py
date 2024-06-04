@@ -56,7 +56,7 @@ def signin():
     resp_json = HttpUtil.post_api_json(
         "/operation/action/newsignin",
         {
-            "roleId": os.environ["roleId"],
+            "roleId": os.environ["smoba_roleId"],
         }
     )
     return resp_json
