@@ -20,44 +20,54 @@ def do_task_list():
 def task_complete(task_id, task_desc):
     if task_id == "2023091500002":
         # print("每天任意点赞营地1条内容")
-        info_list = HttpApi.info_list()
-        if info_list is not None:
-            count = 0
-            for i in range(1):
-                if HttpApi.info_like(info_list["data"]["list"][i]["infoContent"]["infoId"], "1") is not None:
-                    count += 1
-            if count == 1:
-                print(f">任务成功: {task_id}-{task_desc}")
+        list_info_moment = HttpApi.list_info_moment()
+        if list_info_moment is not None:
+            i = 2
+            if list_info_moment["data"]["list"][i]["showType"] == 0:
+                if HttpApi.like_moment(list_info_moment["data"]["list"][i]["momentId"], True) is not None:
+                    print(f">任务成功: 点赞动态完成")
+                else:
+                    print(f">任务失败: 点赞动态出错")
+            elif list_info_moment["data"]["list"][i]["showType"] == 1:
+                if HttpApi.like_info(list_info_moment["data"]["list"][i]["infoContent"]["infoId"], "1") is not None:
+                    print(f">任务成功: 点赞资讯完成")
+                else:
+                    print(f">任务失败: 点赞资讯出错")
             else:
-                print(f">任务失败: {task_id}-{task_desc}")
+                print(f">任务失败: 未知列表类型")
         else:
-            print(f">任务失败: {task_id}-{task_desc}")
+            print(f">任务失败: 获取列表出错")
     elif task_id == "2024010800001":
         # print("当日浏览营地1篇资讯")
-        info_list = HttpApi.info_list()
-        if info_list is not None:
-            count = 0
-            for i in range(1):
-                if HttpApi.info_detail(info_list["data"]["list"][i]["infoContent"]["infoId"]) is not None:
-                    count += 1
-            if count == 1:
-                print(f">任务成功: {task_id}-{task_desc}")
+        list_info_moment = HttpApi.list_info_moment()
+        if list_info_moment is not None:
+            i = 2
+            if list_info_moment["data"]["list"][i]["showType"] == 0:
+                if HttpApi.detail_moment(list_info_moment["data"]["list"][i]["momentId"]) is not None:
+                    print(f">任务成功: 浏览动态完成")
+                else:
+                    print(f">任务失败: 浏览动态出错")
+            elif list_info_moment["data"]["list"][i]["showType"] == 1:
+                if HttpApi.detail_info(list_info_moment["data"]["list"][i]["infoContent"]["infoId"]) is not None:
+                    print(f">任务成功: 浏览资讯完成")
+                else:
+                    print(f">任务失败: 浏览资讯出错")
             else:
-                print(f">任务失败: {task_id}-{task_desc}")
+                print(f">任务失败: 未知列表类型")
         else:
-            print(f">任务失败: {task_id}-{task_desc}")
+            print(f">任务失败: 获取列表出错")
     elif task_id == "2024010800002":
         # print("限时任务：前往任意游戏专区签到1次")
         if HttpApi.signin() is not None:
-            print(f">任务成功: {task_id}-{task_desc}")
+            print(f">任务成功: 专区签到完成")
         else:
-            print(f">任务失败: {task_id}-{task_desc}")
+            print(f">任务失败: 专区签到出错")
     elif task_id == "2024010800004":
         # print("分享王者营地任一内容到社交网络")
         if HttpApi.play_task_data("1") is not None:
-            print(f">任务成功: {task_id}-{task_desc}")
+            print(f">任务成功: 分享内容完成")
         else:
-            print(f">任务失败: {task_id}-{task_desc}")
+            print(f">任务失败: 分享内容出错")
     else:
         print(f">未知任务: {task_id}-{task_desc}")
 
@@ -76,9 +86,9 @@ def do_task_reward():
                 task_ids.append(task_id)
         if len(task_ids) > 0:
             if HttpApi.task_reward(task_ids) is not None:
-                print(f">领取成功: {len(task_ids)}")
+                print(f">领取成功: {len(task_ids)}/{len(task_list)}")
             else:
-                print(f">领取失败: {len(task_ids)}")
+                print(f">领取失败: {len(task_ids)}/{len(task_list)}")
 
 
 def entry():

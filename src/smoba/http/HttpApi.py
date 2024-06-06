@@ -21,7 +21,7 @@ def task_reward(task_id):
     return resp_json
 
 
-def info_list():
+def list_info_moment():
     resp_json = HttpUtil.post_api_json(
         "/info/listinfov2",
         {
@@ -31,7 +31,7 @@ def info_list():
     return resp_json
 
 
-def info_like(info_id, status):
+def like_info(info_id, status):
     resp_json = HttpUtil.post_api_data(
         "/user/addlike",
         {
@@ -42,11 +42,32 @@ def info_like(info_id, status):
     return resp_json
 
 
-def info_detail(info_id):
+def like_moment(moment_id, status):
+    resp_json = HttpUtil.post_api_json(
+        "/moment/like",
+        {
+            "momentId": moment_id,
+            "isLike": status,
+        }
+    )
+    return resp_json
+
+
+def detail_info(info_id):
     resp_json = HttpUtil.post_api_data(
         "/game/detailinfov3",
         {
             "iInfoId": info_id,
+        }
+    )
+    return resp_json
+
+
+def detail_moment(moment_id):
+    resp_json = HttpUtil.post_api_json(
+        "/campcontent/detail",
+        {
+            "content_id": moment_id,
         }
     )
     return resp_json
