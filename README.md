@@ -21,11 +21,11 @@
 
 ---
 
-## 运行状态
+## 访问统计
 
 <p align="center">
     <a href="https://github.com/HdShare/GameHelperAction">
-        <img src="https://github.com/HdShare/GameHelperAction/actions/workflows/python.yml/badge.svg" alt="badge"/>
+        <img src="http://profile-counter.glitch.me/GameHelperAction/count.svg" alt="count"/>
     </a>
 </p>
 
