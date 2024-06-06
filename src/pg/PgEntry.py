@@ -9,26 +9,6 @@ def signin():
         print("签到成功")
 
 
-def do_like_records():
-    resp_json = HttpApi.like_records()
-    if resp_json is not None:
-        # print("点赞记录获取成功")
-        for info in resp_json["data"]["infoList"]:
-            info_id = info["iInfoId"]
-            print(f"正在清理点赞: {info_id}")
-            if HttpApi.like_info(info_id, "0") is not None:
-                print(f">清赞成功")
-            else:
-                print(f">清赞失败:")
-        for moment in resp_json["data"]["momentList"]:
-            moment_id = moment["momentId"]
-            print(f">正在清理点赞: {moment_id}")
-            if HttpApi.like_moment(moment_id, "0") is not None:
-                print(f">清赞成功")
-            else:
-                print(f">清赞失败")
-
-
 def do_task_list():
     resp_json = HttpApi.task_list()
     if resp_json is not None:
@@ -180,11 +160,25 @@ def gift_receive(gift_id, gift_title):
         print(f">未知礼包: {gift_id}-{gift_title}")
 
 
+def do_like_records():
+    resp_json = HttpApi.like_records()
+    if resp_json is not None:
+        # print("点赞记录获取成功")
+        for info in resp_json["data"]["infoList"]:
+            info_id = info["iInfoId"]
+            # print(f"正在清理点赞: {info_id}")
+            HttpApi.like_info(info_id, "0")
+        for moment in resp_json["data"]["momentList"]:
+            moment_id = moment["momentId"]
+            # print(f">正在清理点赞: {moment_id}")
+            HttpApi.like_moment(moment_id, "0")
+
+
 def entry():
     print("#########################################################")
     print(f"# 和平营地 # {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     signin()
-    do_like_records()
     do_task_list()
     do_gift_list()
+    do_like_records()
     print("#########################################################")
