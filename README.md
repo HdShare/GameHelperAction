@@ -40,22 +40,24 @@
 2. **设置 Secrets**：在你的 GitHub 仓库中，点击 "Settings"（设置），然后在左侧菜单中，点击 "Secrets"（密钥）。点击 "New
    repository secret"（新建仓库密钥），并添加以下密钥：
    
-   <table>
-    <tr><td>名称</td><td>密钥</td></tr>
-    <tr><td rowspan="9">和平营地</td></tr>
-    <tr><td>pg_appid</td></tr>
-    <tr><td>pg_msdkEncodeParam</td></tr>
-    <tr><td>pg_openid</td></tr>
-    <tr><td>pg_sig</td></tr>
-    <tr><td>pg_timestamp</td></tr>
-    <tr><td>pg_roleId</td></tr>
-    <tr><td>pg_userId</td></tr>
-    <tr><td>pg_token</td></tr>
-    <tr><td rowspan="4">王者营地</td></tr>
-    <tr><td>smoba_roleId</td></tr>
-    <tr><td>smoba_userId</td></tr>
-    <tr><td>smoba_token</td></tr>
-   </table>
+   ```
+    Desc: 和平营地
+    Secrets:
+        pg_appid
+        pg_msdkEncodeParam
+        pg_openid
+        pg_sig
+        pg_timestamp
+        pg_roleId
+        pg_userId
+        pg_token
+   
+    Desc: 王者营地
+    Secrets:
+        smoba_roleId
+        smoba_userId
+        smoba_token
+   ```
 
 3. **启用 GitHub Actions**：在 "Settings"（设置）页面，点击 "Actions"（操作），然后在 "General"（通用）部分，选择 "Read and write
    permissions"（读写权限）。勾选 "Allow GitHub Actions to create and approve pull requests"（允许 GitHub Actions
