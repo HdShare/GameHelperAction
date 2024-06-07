@@ -22,17 +22,17 @@ def task_complete(task_id, task_desc):
         # print("每天任意点赞营地1条内容")
         list_info_moment = HttpApi.list_info_moment()
         if list_info_moment is not None:
-            i = 2
+            i = -1
             if list_info_moment["data"]["list"][i]["showType"] == 0:
-                if HttpApi.like_moment(list_info_moment["data"]["list"][i]["momentId"], True) is not None:
-                    print(f">任务成功: 点赞动态完成")
-                else:
-                    print(f">任务失败: 点赞动态出错")
-            elif list_info_moment["data"]["list"][i]["showType"] == 1:
                 if HttpApi.like_info(list_info_moment["data"]["list"][i]["infoContent"]["infoId"], "1") is not None:
                     print(f">任务成功: 点赞资讯完成")
                 else:
                     print(f">任务失败: 点赞资讯出错")
+            elif list_info_moment["data"]["list"][i]["showType"] == 1:
+                if HttpApi.like_moment(list_info_moment["data"]["list"][i]["momentId"], True) is not None:
+                    print(f">任务成功: 点赞动态完成")
+                else:
+                    print(f">任务失败: 点赞动态出错")
             else:
                 print(f">任务失败: 未知列表类型")
         else:
@@ -41,17 +41,17 @@ def task_complete(task_id, task_desc):
         # print("当日浏览营地1篇资讯")
         list_info_moment = HttpApi.list_info_moment()
         if list_info_moment is not None:
-            i = 2
+            i = -1
             if list_info_moment["data"]["list"][i]["showType"] == 0:
-                if HttpApi.detail_moment(list_info_moment["data"]["list"][i]["momentId"]) is not None:
-                    print(f">任务成功: 浏览动态完成")
-                else:
-                    print(f">任务失败: 浏览动态出错")
-            elif list_info_moment["data"]["list"][i]["showType"] == 1:
                 if HttpApi.detail_info(list_info_moment["data"]["list"][i]["infoContent"]["infoId"]) is not None:
                     print(f">任务成功: 浏览资讯完成")
                 else:
                     print(f">任务失败: 浏览资讯出错")
+            elif list_info_moment["data"]["list"][i]["showType"] == 1:
+                if HttpApi.detail_moment(list_info_moment["data"]["list"][i]["momentId"]) is not None:
+                    print(f">任务成功: 浏览动态完成")
+                else:
+                    print(f">任务失败: 浏览动态出错")
             else:
                 print(f">任务失败: 未知列表类型")
         else:
