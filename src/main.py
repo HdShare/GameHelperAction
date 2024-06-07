@@ -3,7 +3,7 @@ import sys
 
 if __name__ == '__main__':
     sys.path.append(os.getcwd())
-    from src.env import EnvUtil
+    # from src.env import EnvUtil
     # 本地配置
     # EnvUtil.init()
 
