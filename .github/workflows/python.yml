@@ -39,6 +39,8 @@ jobs:
           smoba_roleId: ${{ secrets.smoba_roleId }}
           smoba_userId: ${{ secrets.smoba_userId }}
           smoba_token: ${{ secrets.smoba_token }}
+          smoba_sOpenId: ${{ secrets.smoba_sOpenId }}
+          smoba_sCampUserId: ${{ secrets.smoba_sCampUserId }}
 
       - name: 'Auto Commit'
         uses: stefanzweifel/git-auto-commit-action@v5

@@ -91,3 +91,8 @@ def play_task_data(task_type):
         }
     )
     return resp_json
+
+
+def camp_task_list():
+    resp_json = HttpUtil.post_api_native("campGetTaskList")
+    return resp_json

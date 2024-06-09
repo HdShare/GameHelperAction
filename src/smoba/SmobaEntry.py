@@ -91,9 +91,38 @@ def do_task_reward():
                 print(f">领取失败: {len(task_ids)}/{len(task_list)}")
 
 
+def do_camp_list():
+    resp_json = HttpApi.camp_task_list()
+    if resp_json is not None:
+        # print("任务列表获取成功")
+        group_tasks = resp_json["data"]["data"]["taskgroup"]["grouptasks"]
+        for group_task in group_tasks:
+            task_id = group_task["taskid"]
+            task_desc = group_task["taskinfo"]["desc"]
+            task_is_finished = group_task["taskdata"]["isfinished"]
+            if not task_is_finished:
+                print(f"正在完成任务: {task_id}-{task_desc}")
+
+
+def do_camp_reward():
+    resp_json = HttpApi.camp_task_list()
+    if resp_json is not None:
+        # print("任务列表获取成功")
+        group_tasks = resp_json["data"]["data"]["taskgroup"]["grouptasks"]
+        for group_task in group_tasks:
+            task_is_finished = group_task["taskdata"]["isfinished"]
+            task_is_awarded = group_task["taskdata"]["isawarded"]
+            task_gift_id = group_task["taskgift"]["id"]
+            task_gift_name = group_task["taskgift"]["name"]
+            if task_is_finished and not task_is_awarded:
+                print(f"正在领取礼包: {task_gift_id}-{task_gift_name}")
+
+
 def entry():
     print("#########################################################")
     print(f"# 王者营地 # {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     do_task_list()
     do_task_reward()
+    do_camp_list()
+    do_camp_reward()
     print("#########################################################")
