@@ -41,7 +41,8 @@
    repository secret"（新建仓库密钥），并添加以下密钥：
    
    ```
-    Desc: 和平营地
+    Name: 和平营地
+    Desc: 福利中心(每日签到 + 每日任务)
     Secrets:
         pg_appid
         pg_msdkEncodeParam
@@ -52,11 +53,14 @@
         pg_userId
         pg_token
    
-    Desc: 王者营地
+    Name: 王者营地
+    Desc: 每日福利 + 工具箱-战令系统(编写中...)
     Secrets:
         smoba_roleId
         smoba_userId
         smoba_token
+        smoba_sOpenId
+        smoba_sCampUserId
    ```
 
 3. **启用 GitHub Actions**：在 "Settings"（设置）页面，点击 "Actions"（操作），然后在 "General"（通用）部分，选择 "Read and write
