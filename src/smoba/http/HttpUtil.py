@@ -57,6 +57,7 @@ def post_api_native(name):
                 "base": {
                     "userinfo": {
                         "sPartition": "1277",
+                        "sMSDKUrlParam": os.environ["smoba_sMSDKUrlParam"],
                         "sOpenId": os.environ["smoba_sOpenId"],
                         "sCampUserId": os.environ["smoba_sCampUserId"]
                     },
