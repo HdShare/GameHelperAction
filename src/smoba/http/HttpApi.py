@@ -101,3 +101,13 @@ def camp_task_list():
 def camp_task_reward():
     resp_json = HttpUtil.post_api_native("campGetTaskReward")
     return resp_json
+
+
+def bbs_sign(bbs_id):
+    resp_json = HttpUtil.post_api_data(
+        "/moment/bbssign",
+        {
+            "bbsId": bbs_id,
+        }
+    )
+    return resp_json

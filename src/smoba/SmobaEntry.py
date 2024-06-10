@@ -99,16 +99,34 @@ def do_camp_list():
             task_is_finished = group_task["taskdata"]["isfinished"]
             if not task_is_finished:
                 print(f"正在完成任务: {task_id}-{task_desc}")
+                camp_complete(task_id, task_desc)
+
+
+def camp_complete(task_id, task_desc):
+    if task_id == 1001145:
+        # print("今日前往每日福利签到")
+        print(">任务失败: 福利签到异常???")
+    elif task_id == 1001159:
+        # print("每日在任意圈子签到")
+        if HttpApi.bbs_sign(25) is not None:
+            print(">任务成功: 圈子签到完成")
+        else:
+            print(">任务失败: 圈子签到出错")
+    elif task_id == 1001295:
+        print("玩家每日观赛30s")
+    else:
+        print(f">未知任务: {task_id}-{task_desc}")
 
 
 def do_camp_reward():
-    resp_json = HttpApi.camp_task_reward()
+    resp_json = HttpApi.camp_task_list()
     if resp_json is not None:
-        group_tasks = resp_json["data"]["data"]
-        if len(group_tasks) > 0:
-            print(f">领取成功: {len(group_tasks)}")
-        else:
-            print(f">领取失败: 奖励个数异常")
+        group_data = resp_json["data"]["data"]["taskgroup"]["groupdata"]
+        num_task = group_data["tasknum"]
+        num_finished = group_data["finishedtasknum"]
+        if num_finished > 0:
+            if HttpApi.camp_task_reward() is not None:
+                print(f">领取成功: {num_finished} / {num_task}")
 
 
 def entry():
