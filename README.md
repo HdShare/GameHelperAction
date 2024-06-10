@@ -59,6 +59,7 @@
         smoba_roleId
         smoba_userId
         smoba_token
+        smoba_sMSDKUrlParam
         smoba_sOpenId
         smoba_sCampUserId
    ```
