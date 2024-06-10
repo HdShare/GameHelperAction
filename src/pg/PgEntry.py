@@ -6,7 +6,7 @@ from src.pg.http import HttpApi
 def signin():
     resp_json = HttpApi.signin()
     if resp_json is not None:
-        print("签到成功")
+        print(">签到成功")
 
 
 def do_task_list():
