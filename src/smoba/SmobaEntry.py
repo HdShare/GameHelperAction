@@ -40,19 +40,14 @@ def task_complete(task_id, task_desc):
         # print("当日浏览营地1篇资讯")
         list_info_moment = HttpApi.list_info_moment()
         if list_info_moment is not None:
-            i = -1
-            if list_info_moment["data"]["list"][i]["showType"] == 0:
-                if HttpApi.detail_info(list_info_moment["data"]["list"][i]["infoContent"]["infoId"]) is not None:
-                    print(">任务成功: 浏览资讯完成")
-                else:
-                    print(">任务失败: 浏览资讯出错")
-            elif list_info_moment["data"]["list"][i]["showType"] == 1:
-                if HttpApi.detail_moment(list_info_moment["data"]["list"][i]["momentId"]) is not None:
-                    print(">任务成功: 浏览动态完成")
-                else:
-                    print(">任务失败: 浏览动态出错")
-            else:
-                print(">任务失败: 未知列表类型")
+            for item in reversed(list_info_moment["data"]["list"]):
+                if item["showType"] == 0:
+                    if HttpApi.detail_info(item["infoContent"]["infoId"]) is not None:
+                        print(">任务成功: 浏览资讯完成")
+                        break
+                    else:
+                        print(">任务失败: 浏览资讯出错")
+                        break
         else:
             print(">任务失败: 获取列表出错")
     elif task_id == "2024010800002":
