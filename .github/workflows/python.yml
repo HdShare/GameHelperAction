@@ -26,8 +26,9 @@ jobs:
         run: pip install -r src/requirements.txt
 
       - name: 'Run Script'
-        run: python src/main.py >> log/run.log
+        run: python src/main.py
         env:
+          pushplus_token: ${{ secrets.pushplus_token }}
           pg_enable: ${{ secrets.pg_enable }}
           pg_appid: ${{ secrets.pg_appid }}
           pg_msdkEncodeParam: ${{ secrets.pg_msdkEncodeParam }}
@@ -44,12 +45,3 @@ jobs:
           smoba_sMSDKUrlParam: ${{ secrets.smoba_sMSDKUrlParam }}
           smoba_sOpenId: ${{ secrets.smoba_sOpenId }}
           smoba_sCampUserId: ${{ secrets.smoba_sCampUserId }}
-
-      - name: 'Auto Commit'
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          branch: main
-          file_pattern: log/run.log
-          commit_message: update run.log
-          commit_user_name: GitHub Actions
-          commit_user_email: actions@github.com

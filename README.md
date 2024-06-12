@@ -41,6 +41,12 @@
    repository secret"（新建仓库密钥），并添加以下密钥：
 
    ```
+    Name: PushPlus
+    Desc: 
+        消息推送
+    Secrets:
+        pushplus_token
+   
     Name: 和平营地
     Desc: 
         福利中心(每日签到 + 每日任务)
