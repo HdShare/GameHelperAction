@@ -59,9 +59,9 @@ def post_api_native(name):
                         "sPartition": "1277",
                         "sMSDKUrlParam": os.environ["smoba_sMSDKUrlParam"],
                         "sOpenId": os.environ["smoba_sOpenId"],
-                        "sCampUserId": os.environ["smoba_sCampUserId"]
+                        "sCampUserId": os.environ["smoba_sCampUserId"],
                     },
-                    "pdr_app_ver": "lastest_gray"
+                    "pdr_app_ver": "lastest_gray",
                 }
             },
         )

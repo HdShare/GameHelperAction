@@ -54,7 +54,7 @@ def page_info():
             "type": "51005184",
             "pos1": "2",
             "sort": "2",
-            "page": "1"
+            "page": "1",
         }
     )
     return resp_json
@@ -75,7 +75,7 @@ def page_moment():
     resp_json = HttpUtil.post_api(
         "/moment/squaretagmoments",
         {
-            "tagId": "1"
+            "tagId": "1",
         }
     )
     return resp_json
