@@ -42,9 +42,10 @@
 
    ```
     Name: 和平营地
-    Desc: 福利中心(每日签到 + 每日任务)
+    Desc: 
+        福利中心(每日签到 + 每日任务)
     Secrets:
-        pg_enable(是否启用|true)
+        pg_enable(true)
         pg_appid
         pg_msdkEncodeParam
         pg_openid
@@ -55,9 +56,12 @@
         pg_token
    
     Name: 王者营地
-    Desc: 每日福利 + 工具箱-战令系统(编写中...)
+    Desc: 
+        我-每日福利
+        游戏-工具箱-战令系统(编写中)
+        游戏-每日福利-每日任务(计划中)
     Secrets:
-        smoba_enable(是否启用|true)
+        smoba_enable(true)
         smoba_roleId
         smoba_userId
         smoba_token
