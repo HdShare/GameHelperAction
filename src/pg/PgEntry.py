@@ -175,7 +175,7 @@ def do_like_records():
 
 
 def entry():
-    if os.environ.get("pg_enabled") == "true":
+    if os.environ.get("pg_enable") == "true":
         print("#########################################################")
         print(f"# 和平营地 # {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         if Util.check_repo_secrets(
