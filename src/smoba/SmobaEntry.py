@@ -123,14 +123,9 @@ def camp_complete(task_id, task_desc):
 
 def do_camp_reward():
     global send_content
-    resp_json = HttpApi.camp_task_list()
+    resp_json = HttpApi.camp_task_reward()
     if resp_json is not None:
-        group_data = resp_json["data"]["data"]["taskgroup"]["groupdata"]
-        num_task = group_data["tasknum"]
-        num_finished = group_data["finishedtasknum"]
-        if num_finished > 0:
-            if HttpApi.camp_task_reward() is not None:
-                send_content += f">领取成功: {num_finished} / {num_task}\n"
+        send_content += f">领取成功(待开发): {resp_json}\n"
 
 
 def entry():
