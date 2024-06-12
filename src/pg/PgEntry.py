@@ -1,6 +1,8 @@
+import os
 from datetime import datetime
 
 from src.pg.http import HttpApi
+from src.util import Util
 
 
 def signin():
@@ -173,10 +175,23 @@ def do_like_records():
 
 
 def entry():
-    print("#########################################################")
-    print(f"# 和平营地 # {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    signin()
-    do_task_list()
-    do_gift_list()
-    do_like_records()
-    print("#########################################################")
+    if os.environ.get("pg_enabled") == "true":
+        print("#########################################################")
+        print(f"# 和平营地 # {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        if Util.check_repo_secrets(
+                [
+                    "pg_appid",
+                    "pg_msdkEncodeParam",
+                    "pg_openid",
+                    "pg_sig",
+                    "pg_timestamp",
+                    "pg_roleId",
+                    "pg_userId",
+                    "pg_token"
+                ]
+        ):
+            signin()
+            do_task_list()
+            do_gift_list()
+            do_like_records()
+        print("#########################################################")

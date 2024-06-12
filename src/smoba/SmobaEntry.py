@@ -1,6 +1,8 @@
+import os
 from datetime import datetime
 
 from src.smoba.http import HttpApi
+from src.util import Util
 
 
 def do_task_list():
@@ -127,10 +129,25 @@ def do_camp_reward():
 
 
 def entry():
-    print("#########################################################")
-    print(f"# 王者营地 # {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    do_task_list()
-    do_task_reward()
-    do_camp_list()
-    do_camp_reward()
-    print("#########################################################")
+    if os.environ.get("smoba_enable") == "true":
+        print("#########################################################")
+        print(f"# 王者营地 # {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        if Util.check_repo_secrets(
+                [
+                    "smoba_roleId",
+                    "smoba_userId",
+                    "smoba_token"
+                ]
+        ):
+            do_task_list()
+            do_task_reward()
+        if Util.check_repo_secrets(
+                [
+                    "smoba_sMSDKUrlParam",
+                    "smoba_sOpenId",
+                    "smoba_sCampUserId"
+                ]
+        ):
+            do_camp_list()
+            do_camp_reward()
+        print("#########################################################")

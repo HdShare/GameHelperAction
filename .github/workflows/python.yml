@@ -28,6 +28,7 @@ jobs:
       - name: 'Run Script'
         run: python src/main.py >> log/run.log
         env:
+          pg_enable: ${{ secrets.pg_enable }}
           pg_appid: ${{ secrets.pg_appid }}
           pg_msdkEncodeParam: ${{ secrets.pg_msdkEncodeParam }}
           pg_openid: ${{ secrets.pg_openid }}
@@ -36,6 +37,7 @@ jobs:
           pg_roleId: ${{ secrets.pg_roleId }}
           pg_userId: ${{ secrets.pg_userId }}
           pg_token: ${{ secrets.pg_token }}
+          smoba_enable: ${{ secrets.smoba_enable }}
           smoba_roleId: ${{ secrets.smoba_roleId }}
           smoba_userId: ${{ secrets.smoba_userId }}
           smoba_token: ${{ secrets.smoba_token }}

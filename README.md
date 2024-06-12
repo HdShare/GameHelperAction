@@ -39,11 +39,12 @@
 
 2. **设置 Secrets**：在你的 GitHub 仓库中，点击 "Settings"（设置），然后在左侧菜单中，点击 "Secrets"（密钥）。点击 "New
    repository secret"（新建仓库密钥），并添加以下密钥：
-   
+
    ```
     Name: 和平营地
     Desc: 福利中心(每日签到 + 每日任务)
     Secrets:
+        pg_enable(是否启用|true)
         pg_appid
         pg_msdkEncodeParam
         pg_openid
@@ -56,6 +57,7 @@
     Name: 王者营地
     Desc: 每日福利 + 工具箱-战令系统(编写中...)
     Secrets:
+        smoba_enable(是否启用|true)
         smoba_roleId
         smoba_userId
         smoba_token
