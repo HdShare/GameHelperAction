@@ -157,4 +157,4 @@ def entry():
             send_content += ">环境变量未配置\n"
         send_content += "#####################################\n"
         print(send_content)
-        PushPlus.send("GameHelperAction-王者营地", send_content)
+        PushPlus.send("Action-王者营地", send_content)
