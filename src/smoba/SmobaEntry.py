@@ -27,19 +27,20 @@ def task_complete(task_id, task_desc):
         # print("每天任意点赞营地1条内容")
         list_info_moment = HttpApi.list_info_moment()
         if list_info_moment is not None:
-            i = -1
-            if list_info_moment["data"]["list"][i]["showType"] == 0:
-                if HttpApi.like_info(list_info_moment["data"]["list"][i]["infoContent"]["infoId"], "1") is not None:
-                    send_content += ">任务成功: 点赞资讯完成\n"
-                else:
-                    send_content += ">任务失败: 点赞资讯出错\n"
-            elif list_info_moment["data"]["list"][i]["showType"] == 1:
-                if HttpApi.like_moment(list_info_moment["data"]["list"][i]["momentId"], True) is not None:
-                    send_content += ">任务成功: 点赞动态完成\n"
-                else:
-                    send_content += ">任务失败: 点赞动态出错\n"
+            is_success = False
+            for item in reversed(list_info_moment["data"]["list"]):
+                if item["type"] == 14:
+                    if HttpApi.like_info(item["infoContent"]["infoId"], "1") is not None:
+                        is_success = True
+                        break
+                elif item["type"] == 2:
+                    if HttpApi.like_moment(item["momentId"], True) is not None:
+                        is_success = True
+                        break
+            if is_success:
+                send_content += ">任务成功: 点赞内容完成\n"
             else:
-                send_content += ">任务失败: 未知列表类型\n"
+                send_content += ">任务失败: 点赞内容出错\n"
         else:
             send_content += ">任务失败: 获取列表出错\n"
     elif task_id == "2024010800001":
@@ -48,8 +49,12 @@ def task_complete(task_id, task_desc):
         if list_info_moment is not None:
             is_success = False
             for item in reversed(list_info_moment["data"]["list"]):
-                if item["showType"] == 0:
+                if item["type"] == 14:
                     if HttpApi.detail_info(item["infoContent"]["infoId"]) is not None:
+                        is_success = True
+                        break
+                elif item["type"] == 15:
+                    if HttpApi.detail_post(item["postContent"]["postId"]) is not None:
                         is_success = True
                         break
             if is_success:

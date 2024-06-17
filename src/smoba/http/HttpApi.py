@@ -63,6 +63,16 @@ def detail_info(info_id):
     return resp_json
 
 
+def detail_post(info_id):
+    resp_json = HttpUtil.post_api_data(
+        "/game/detailinfobbs",
+        {
+            "iInfoId": info_id,
+        }
+    )
+    return resp_json
+
+
 def detail_moment(moment_id):
     resp_json = HttpUtil.post_api_json(
         "/campcontent/detail",
