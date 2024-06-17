@@ -1,4 +1,5 @@
 import os
+import time
 from datetime import datetime
 
 from src.smoba.http import HttpApi
@@ -116,16 +117,19 @@ def camp_complete(task_id, task_desc):
         else:
             send_content += ">任务失败: 圈子签到出错\n"
     elif task_id == 1001295:
-        send_content += "玩家每日观赛30s\n"
+        # print("玩家每日观赛30s")
+        send_content += ">任务失败: 每日观赛出错\n"
     else:
         send_content += f">未知任务: {task_id}-{task_desc}\n"
 
 
 def do_camp_reward():
+    # test sleep
+    time.sleep(2)
     global send_content
     resp_json = HttpApi.camp_task_reward()
     if resp_json is not None:
-        send_content += f">领取成功(待开发): {resp_json}\n"
+        send_content += f">领取成功: {resp_json}\n"
 
 
 def entry():
