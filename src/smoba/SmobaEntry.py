@@ -1,5 +1,4 @@
 import os
-import time
 from datetime import datetime
 
 from src.smoba.http import HttpApi
@@ -99,7 +98,7 @@ def do_task_reward():
 
 
 def do_camp_list():
-    resp_json = HttpApi.camp_task_list()
+    resp_json = HttpApi.camp_get_task_list()
     if resp_json is not None:
         group_tasks = resp_json["data"]["data"]["taskgroup"]["grouptasks"]
         for group_task in group_tasks:
@@ -129,12 +128,13 @@ def camp_complete(task_id, task_desc):
 
 
 def do_camp_reward():
-    # test sleep
-    time.sleep(2)
     global send_content
-    resp_json = HttpApi.camp_task_reward()
+    resp_json = HttpApi.camp_get_task_reward()
     if resp_json is not None:
-        send_content += f">领取成功: {resp_json}\n"
+        send_content += f">领取成功: 领取奖励完成\n"
+    resp_json = HttpApi.camp_set_task_finish_count()
+    if resp_json is not None:
+        send_content += f">刷新成功: 刷新数量完成\n"
 
 
 def entry():

@@ -103,13 +103,29 @@ def play_task_data(task_type):
     return resp_json
 
 
-def camp_task_list():
-    resp_json = HttpUtil.post_api_native("campGetTaskList")
+def camp_get_task_list():
+    resp_json = HttpUtil.post_api_native(
+        "campGetTaskList",
+        {}
+    )
     return resp_json
 
 
-def camp_task_reward():
-    resp_json = HttpUtil.post_api_native("campGetTaskReward")
+def camp_get_task_reward():
+    resp_json = HttpUtil.post_api_native(
+        "campGetTaskReward",
+        {}
+    )
+    return resp_json
+
+
+def camp_set_task_finish_count():
+    resp_json = HttpUtil.post_api_native(
+        "campSetTaskFinishCount",
+        {
+            "taskIds": []
+        }
+    )
     return resp_json
 
 

@@ -49,11 +49,12 @@ def post_api_data(api, param_data):
         return None
 
 
-def post_api_native(name):
+def post_api_native(name, data):
     try:
         resp = requests.post(
             url="https://yxzjfaas.native.qq.com/backend_polaris/?namespace=Faas&pdr_appid=3732&fn=" + name,
             json={
+                "data": data,
                 "base": {
                     "userinfo": {
                         "sPartition": "1277",
