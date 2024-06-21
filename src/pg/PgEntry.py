@@ -2,8 +2,7 @@ import os
 from datetime import datetime
 
 from src.pg.http import HttpApi
-from src.util import PushPlus
-from src.util import Util
+from src.util import Util, PushPlus
 
 send_content = ""
 
@@ -167,7 +166,50 @@ def gift_receive(gift_id, gift_title):
         send_content += f">未知礼包: {gift_id}-{gift_title}\n"
 
 
-def do_like_records():
+def do_welfare_list():
+    resp_json = HttpApi.welfare_list()
+    if resp_json is not None:
+        tasks = resp_json["data"]["tasks"]
+        for task in tasks:
+            task_id = task["taskId"]
+            task_title = task["title"]
+            task_index = task["index"]
+            task_status = task["status"]
+            if task_status == 0:
+                welfare_complete(task_id, task_title, task_index)
+            elif task_status == 1:
+                HttpApi.welfare_complete(task_index)
+
+
+def welfare_complete(task_id, task_title, task_index):
+    global send_content
+    if task_id == 1002:
+        # print("本日获得一场经典模式比赛胜利")
+        send_content += ">任务失败: 无法获得胜利\n"
+    elif task_id == 1005:
+        # print("本日分享自己的战绩到社交网络")
+        if HttpApi.share("shareMatch", "") is not None:
+            send_content += ">任务成功: 分享战绩完成\n"
+            HttpApi.welfare_complete(task_index)
+        else:
+            send_content += ">任务失败: 分享战绩出错\n"
+    elif task_id == 1008:
+        # print("本日浏览1次攻略专区")
+        send_content += ">任务失败: 无法浏览攻略\n"
+    elif task_id == 1009:
+        # print("本日在营地观看1次战绩复盘")
+        send_content += ">任务失败: 无法观看复盘\n"
+    elif task_id == 1012:
+        # print("本日为资讯点赞3次")
+        send_content += ">任务失败: 无法点赞资讯\n"
+    elif task_id == 1013:
+        # print("本日为动态点赞3次")
+        send_content += ">任务失败: 无法点赞动态\n"
+    else:
+        send_content += f">未知任务: {task_id}-{task_title}\n"
+
+
+def do_clear_like():
     resp_json = HttpApi.like_records()
     if resp_json is not None:
         for info in resp_json["data"]["infoList"]:
@@ -196,9 +238,9 @@ def entry():
                 ]
         ):
             signin()
-            do_task_list()
+            do_welfare_list()
             do_gift_list()
-            do_like_records()
+            do_clear_like()
         else:
             send_content += ">环境变量未配置\n"
         send_content += "#####################################\n"
