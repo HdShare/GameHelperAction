@@ -36,6 +36,9 @@
 请按照以下步骤来配置和使用这个项目：
 
 1. **Fork 项目**：点击项目右上角的 "Fork" 按钮，将这个项目复制到你的 GitHub 账户中。
+   (⚠️**对于 Fork 的开发者/用户, 请不要滥用GitHub Action, 因为 GitHub 将计算您的分支 GitHub Actions 使用量并归属到上游存储库,
+   这可能导致此上游存储库被 GitHub 禁用**)
+
 
 2. **设置 Secrets**：在你的 GitHub 仓库中，点击 "Settings"（设置），然后在左侧菜单中，点击 "Secrets"（密钥）。点击 "New
    repository secret"（新建仓库密钥），并添加以下密钥：
