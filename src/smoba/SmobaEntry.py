@@ -2,8 +2,7 @@ import os
 from datetime import datetime
 
 from src.smoba.http import HttpApi
-from src.util import PushPlus
-from src.util import Util
+from src.util import Util, PushPlus
 
 send_content = ""
 
