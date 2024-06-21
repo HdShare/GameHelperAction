@@ -55,6 +55,14 @@ def welfare_list():
     return resp_json
 
 
+def welfare_refresh_list():
+    resp_json = HttpUtil.post_h5api(
+        "/activity/welfare/refreshtask.php",
+        {}
+    )
+    return resp_json
+
+
 def welfare_complete(task_index):
     resp_json = HttpUtil.post_h5api(
         "/activity/welfare/completetask.php",
