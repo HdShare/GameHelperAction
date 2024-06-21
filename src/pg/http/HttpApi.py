@@ -47,6 +47,24 @@ def task_complete(task_id):
     return resp_json
 
 
+def welfare_list():
+    resp_json = HttpUtil.post_h5api(
+        "/activity/welfare/tasklist.php",
+        {}
+    )
+    return resp_json
+
+
+def welfare_complete(task_index):
+    resp_json = HttpUtil.post_h5api(
+        "/activity/welfare/completetask.php",
+        {
+            "taskIndex": task_index,
+        }
+    )
+    return resp_json
+
+
 def page_info():
     resp_json = HttpUtil.post_api(
         "/game/infomainpage",
