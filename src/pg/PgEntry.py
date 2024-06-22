@@ -193,6 +193,9 @@ def welfare_complete(task_id, task_title, task_index):
             HttpApi.welfare_complete(task_index)
         else:
             send_content += ">任务失败: 分享资产出错\n"
+    elif task_id == 1004:
+        # print("本日分享自己的战绩复盘到社交网络")
+        send_content += ">任务失败: 分享复盘出错\n"
     elif task_id == 1005:
         # print("本日分享自己的战绩到社交网络")
         if HttpApi.share("shareMatch", "") is not None:
@@ -216,6 +219,9 @@ def welfare_complete(task_id, task_title, task_index):
     elif task_id == 1009:
         # print("本日在营地观看1次战绩复盘")
         send_content += ">任务失败: 无法观看复盘\n"
+    elif task_id == 1010:
+        # print("本日浏览3分钟资讯")
+        send_content += ">任务失败: 无法浏览资讯\n"
     elif task_id == 1011:
         # print("开启4个营地对局工具（不含游戏加速器）")
         open_count = 0
