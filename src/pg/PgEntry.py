@@ -181,9 +181,20 @@ def do_welfare_list():
                 HttpApi.welfare_complete(task_index)
 
 
+def refresh_welfare_list():
+    global send_content
+    if HttpApi.welfare_refresh_list() is not None:
+        send_content += ">任务成功: 刷新任务完成\n"
+    else:
+        send_content += ">任务失败: 刷新任务出错\n"
+
+
 def welfare_complete(task_id, task_title, task_index):
     global send_content
-    if task_id == 1002:
+    if task_id == 1001:
+        # print("本日启动1次和平精英")
+        send_content += ">任务失败: 无法启动和平\n"
+    elif task_id == 1002:
         # print("本日获得一场经典模式比赛胜利")
         send_content += ">任务失败: 无法获得胜利\n"
     elif task_id == 1003:
@@ -195,7 +206,11 @@ def welfare_complete(task_id, task_title, task_index):
             send_content += ">任务失败: 分享资产出错\n"
     elif task_id == 1004:
         # print("本日分享自己的战绩复盘到社交网络")
-        send_content += ">任务失败: 分享复盘出错\n"
+        if HttpApi.share("shareH5", "https://c.gp.qq.com/reviewV4/") is not None:
+            send_content += ">任务成功: 分享复盘完成\n"
+            HttpApi.welfare_complete(task_index)
+        else:
+            send_content += ">任务失败: 分享复盘出错\n"
     elif task_id == 1005:
         # print("本日分享自己的战绩到社交网络")
         if HttpApi.share("shareMatch", "") is not None:
@@ -205,7 +220,7 @@ def welfare_complete(task_id, task_title, task_index):
             send_content += ">任务失败: 分享战绩出错\n"
     elif task_id == 1006:
         # print("本日分享一篇资讯到社交网络")
-        if HttpApi.share("shareInfo", "") is not None:
+        if HttpApi.share("shareInfo", "1") is not None:
             send_content += ">任务成功: 分享资讯完成\n"
             HttpApi.welfare_complete(task_index)
         else:
@@ -221,7 +236,14 @@ def welfare_complete(task_id, task_title, task_index):
         send_content += ">任务失败: 无法观看复盘\n"
     elif task_id == 1010:
         # print("本日浏览3分钟资讯")
-        send_content += ">任务失败: 无法浏览资讯\n"
+        ext_data = [{
+            "reportInterval": 5,
+            "eventId": 100004,
+            "subModuleId": 27,
+            "page": 101004,
+            "moduleId": 1
+        }] * 12
+        module_report(ext_data, task_id, task_title)
     elif task_id == 1011:
         # print("开启4个营地对局工具（不含游戏加速器）")
         open_count = 0
@@ -297,7 +319,7 @@ def entry():
         ):
             signin()
             do_welfare_list()
-            do_gift_list()
+            # refresh_welfare_list()
             do_clear_like()
         else:
             send_content += ">环境变量未配置\n"
