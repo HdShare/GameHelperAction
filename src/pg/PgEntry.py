@@ -177,8 +177,6 @@ def do_welfare_list():
             task_status = task["status"]
             if task_status == 0:
                 welfare_complete(task_id, task_title, task_index)
-            elif task_status == 1:
-                HttpApi.welfare_complete(task_index)
 
 
 def refresh_welfare_list():
@@ -201,28 +199,24 @@ def welfare_complete(task_id, task_title, task_index):
         # print("本日在营地分享“我的资产”到社交网络")
         if HttpApi.share("shareAssets", "") is not None:
             send_content += ">任务成功: 分享资产完成\n"
-            HttpApi.welfare_complete(task_index)
         else:
             send_content += ">任务失败: 分享资产出错\n"
     elif task_id == 1004:
         # print("本日分享自己的战绩复盘到社交网络")
         if HttpApi.share("shareH5", "https://c.gp.qq.com/reviewV4/") is not None:
             send_content += ">任务成功: 分享复盘完成\n"
-            HttpApi.welfare_complete(task_index)
         else:
             send_content += ">任务失败: 分享复盘出错\n"
     elif task_id == 1005:
         # print("本日分享自己的战绩到社交网络")
         if HttpApi.share("shareMatch", "") is not None:
             send_content += ">任务成功: 分享战绩完成\n"
-            HttpApi.welfare_complete(task_index)
         else:
             send_content += ">任务失败: 分享战绩出错\n"
     elif task_id == 1006:
         # print("本日分享一篇资讯到社交网络")
         if HttpApi.share("shareInfo", "1") is not None:
             send_content += ">任务成功: 分享资讯完成\n"
-            HttpApi.welfare_complete(task_index)
         else:
             send_content += ">任务失败: 分享资讯出错\n"
     elif task_id == 1007:
@@ -252,7 +246,6 @@ def welfare_complete(task_id, task_title, task_index):
                 open_count += 1
         if open_count == 4:
             send_content += ">任务成功: 启用工具完成\n"
-            HttpApi.task_complete(task_id)
         else:
             send_content += ">任务失败: 启用工具出错\n"
     elif task_id == 1012:
@@ -265,7 +258,6 @@ def welfare_complete(task_id, task_title, task_index):
                     like_count += 1
             if like_count == 3:
                 send_content += ">任务成功: 点赞资讯完成\n"
-                HttpApi.welfare_complete(task_index)
             else:
                 send_content += ">任务失败: 点赞资讯出错\n"
         else:
@@ -280,13 +272,23 @@ def welfare_complete(task_id, task_title, task_index):
                     like_count += 1
             if like_count == 3:
                 send_content += ">任务成功: 点赞动态完成\n"
-                HttpApi.welfare_complete(task_index)
             else:
                 send_content += ">任务失败: 点赞动态出错\n"
         else:
             send_content += ">任务失败: 获取动态出错\n"
     else:
         send_content += f">未知任务: {task_id}-{task_title}\n"
+
+
+def do_welfare_reward():
+    resp_json = HttpApi.welfare_list()
+    if resp_json is not None:
+        tasks = resp_json["data"]["tasks"]
+        for task in tasks:
+            task_index = task["index"]
+            task_status = task["status"]
+            if task_status == 1:
+                HttpApi.welfare_complete(task_index)
 
 
 def do_clear_like():
@@ -319,6 +321,7 @@ def entry():
         ):
             signin()
             do_welfare_list()
+            do_welfare_reward()
             # refresh_welfare_list()
             do_clear_like()
         else:
