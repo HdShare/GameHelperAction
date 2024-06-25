@@ -173,10 +173,9 @@ def do_welfare_list():
         for task in tasks:
             task_id = task["taskId"]
             task_title = task["title"]
-            task_index = task["index"]
             task_status = task["status"]
             if task_status == 0:
-                welfare_complete(task_id, task_title, task_index)
+                welfare_complete(task_id, task_title)
 
 
 def refresh_welfare_list():
@@ -187,7 +186,7 @@ def refresh_welfare_list():
         send_content += ">任务失败: 刷新任务出错\n"
 
 
-def welfare_complete(task_id, task_title, task_index):
+def welfare_complete(task_id, task_title):
     global send_content
     if task_id == 1001:
         # print("本日启动1次和平精英")
@@ -221,7 +220,10 @@ def welfare_complete(task_id, task_title, task_index):
             send_content += ">任务失败: 分享资讯出错\n"
     elif task_id == 1007:
         # print("本日在“和平营地”对资讯进行一次充能")
-        send_content += ">任务失败: 无法充能资讯\n"
+        if HttpApi.recharge("1103860286", "1") is not None:
+            send_content += ">任务成功: 充能资讯完成\n"
+        else:
+            send_content += ">任务失败: 充能资讯出错\n"
     elif task_id == 1008:
         # print("本日浏览1次攻略专区")
         send_content += ">任务失败: 无法浏览攻略\n"
@@ -276,6 +278,9 @@ def welfare_complete(task_id, task_title, task_index):
                 send_content += ">任务失败: 点赞动态出错\n"
         else:
             send_content += ">任务失败: 获取动态出错\n"
+    elif task_id == 1014:
+        # print("本日在营地进行一次好友观战")
+        send_content += ">任务失败: 无法观战好友\n"
     else:
         send_content += f">未知任务: {task_id}-{task_title}\n"
 

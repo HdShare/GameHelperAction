@@ -148,3 +148,14 @@ def share(action, action_id):
         }
     )
     return resp_json
+
+
+def recharge(info_id, count):
+    resp_json = HttpUtil.post_api(
+        "/game/recharge",
+        {
+            "iInfoId": info_id,
+            "rechargeCnt": count,
+        }
+    )
+    return resp_json
