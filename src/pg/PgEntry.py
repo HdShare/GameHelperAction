@@ -229,7 +229,10 @@ def welfare_complete(task_id, task_title):
         send_content += ">任务失败: 无法浏览攻略\n"
     elif task_id == 1009:
         # print("本日在营地观看1次战绩复盘")
-        send_content += ">任务失败: 无法观看复盘\n"
+        if HttpApi.replay_data() is not None:
+            send_content += ">任务成功: 观看复盘完成\n"
+        else:
+            send_content += ">任务失败: 观看复盘出错\n"
     elif task_id == 1010:
         # print("本日浏览3分钟资讯")
         ext_data = [{
