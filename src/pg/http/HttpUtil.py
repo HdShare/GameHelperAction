@@ -33,7 +33,7 @@ def post_h5api(url, params):
         "timestamp": os.environ["pg_timestamp"],
         "roleId": os.environ["pg_roleId"],
     }
-    return post_common("https://c.gp.qq.com/gp/api/php" + url, params, common_params)
+    return post_common("https://c.gp.qq.com" + url, params, common_params)
 
 
 def post_api(url, params):

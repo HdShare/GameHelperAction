@@ -5,7 +5,7 @@ from src.pg.http import HttpUtil
 
 def signin():
     resp_json = HttpUtil.post_h5api(
-        "/act_dailysigninmonthly.php",
+        "/gp/api/php/act_dailysigninmonthly.php",
         {}
     )
     return resp_json
@@ -21,7 +21,7 @@ def like_records():
 
 def task_list():
     resp_json = HttpUtil.post_h5api(
-        "/act_getscoretasklist.php",
+        "/gp/api/php/act_getscoretasklist.php",
         {}
     )
     return resp_json
@@ -29,7 +29,7 @@ def task_list():
 
 def gift_receive(gift_id):
     resp_json = HttpUtil.post_h5api(
-        "/act_receivelivenessgift.php",
+        "/gp/api/php/act_receivelivenessgift.php",
         {
             "giftId": gift_id,
         }
@@ -39,7 +39,7 @@ def gift_receive(gift_id):
 
 def task_complete(task_id):
     resp_json = HttpUtil.post_h5api(
-        "/completescoretask.php",
+        "/gp/api/php/completescoretask.php",
         {
             "taskId": task_id,
         }
@@ -49,7 +49,7 @@ def task_complete(task_id):
 
 def welfare_list():
     resp_json = HttpUtil.post_h5api(
-        "/activity/welfare/tasklist.php",
+        "/gp/api/php/activity/welfare/tasklist.php",
         {}
     )
     return resp_json
@@ -57,7 +57,7 @@ def welfare_list():
 
 def welfare_refresh_list():
     resp_json = HttpUtil.post_h5api(
-        "/activity/welfare/refreshtask.php",
+        "/gp/api/php/activity/welfare/refreshtask.php",
         {}
     )
     return resp_json
@@ -65,7 +65,7 @@ def welfare_refresh_list():
 
 def welfare_complete(task_index):
     resp_json = HttpUtil.post_h5api(
-        "/activity/welfare/completetask.php",
+        "/gp/api/php/activity/welfare/completetask.php",
         {
             "taskIndex": task_index,
         }
@@ -157,5 +157,13 @@ def recharge(info_id, count):
             "iInfoId": info_id,
             "rechargeCnt": count,
         }
+    )
+    return resp_json
+
+
+def replay_data():
+    resp_json = HttpUtil.post_h5api(
+        "/h5/getpubgreplaydata4.php",
+        {}
     )
     return resp_json
