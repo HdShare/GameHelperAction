@@ -219,6 +219,7 @@ def welfare_complete(task_id, task_title):
         else:
             send_content += ">任务失败: 分享资讯出错\n"
     elif task_id == 1007:
+        # TODO: 有问题 -> 资讯已达到充能上限
         # print("本日在“和平营地”对资讯进行一次充能")
         if HttpApi.recharge("1103860286", "1") is not None:
             send_content += ">任务成功: 充能资讯完成\n"
@@ -226,7 +227,10 @@ def welfare_complete(task_id, task_title):
             send_content += ">任务失败: 充能资讯出错\n"
     elif task_id == 1008:
         # print("本日浏览1次攻略专区")
-        send_content += ">任务失败: 无法浏览攻略\n"
+        if HttpApi.station() is not None:
+            send_content += ">任务成功: 浏览攻略完成\n"
+        else:
+            send_content += ">任务失败: 浏览攻略出错\n"
     elif task_id == 1009:
         # print("本日在营地观看1次战绩复盘")
         if HttpApi.replay_data() is not None:
