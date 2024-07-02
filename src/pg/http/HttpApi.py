@@ -150,6 +150,14 @@ def share(action, action_id):
     return resp_json
 
 
+def recharge_rank():
+    resp_json = HttpUtil.post_api(
+        "/game/getrechargerank",
+        {}
+    )
+    return resp_json
+
+
 def recharge(info_id, count):
     resp_json = HttpUtil.post_api(
         "/game/recharge",
@@ -157,6 +165,14 @@ def recharge(info_id, count):
             "iInfoId": info_id,
             "rechargeCnt": count,
         }
+    )
+    return resp_json
+
+
+def station():
+    resp_json = HttpUtil.post_api(
+        "/game/getstationhome",
+        {}
     )
     return resp_json
 
