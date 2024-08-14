@@ -341,7 +341,9 @@ def entry():
             signin()
             do_welfare_list()
             do_welfare_reward()
-            # refresh_welfare_list()
+            refresh_welfare_list()
+            do_welfare_list()
+            do_welfare_reward()
             do_clear_like()
         else:
             send_content += ">环境变量未配置\n"
