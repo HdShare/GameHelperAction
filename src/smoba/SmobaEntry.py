@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 
 from src.smoba.http import HttpApi
-from src.util import Util, PushPlus
+from src.util import Util, ServerChan
 
 send_content = ""
 
@@ -165,4 +165,4 @@ def entry():
             send_content += ">环境变量未配置\n"
         send_content += "#####################################\n"
         print(send_content)
-        PushPlus.send("Action-王者营地", send_content)
+        ServerChan.send("Action-王者营地", send_content)

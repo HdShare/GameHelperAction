@@ -29,6 +29,7 @@ jobs:
         run: python src/main.py
         env:
           pushplus_token: ${{ secrets.pushplus_token }}
+          serverchan_token: ${{ secrets.serverchan_token }}
           pg_enable: ${{ secrets.pg_enable }}
           pg_appid: ${{ secrets.pg_appid }}
           pg_msdkEncodeParam: ${{ secrets.pg_msdkEncodeParam }}
