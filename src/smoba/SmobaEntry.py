@@ -96,6 +96,19 @@ def do_task_reward():
                 send_content += f">领取失败: {len(task_ids)} / {len(task_list)}\n"
 
 
+def do_clear_like():
+    resp_json = HttpApi.records_list(10, "LIKE")
+    if resp_json is not None:
+        for info in resp_json["data"]["list"]:
+            item_id = info["itemId"]
+            if item_id.startswith("1_"):
+                info_id = item_id.split("_")[1]
+                HttpApi.like_info(info_id, "0")
+            if item_id.startswith("4_"):
+                moment_id = item_id.split("_")[1]
+                HttpApi.like_moment(moment_id, False)
+
+
 def do_camp_list():
     resp_json = HttpApi.camp_get_task_list()
     if resp_json is not None:
@@ -150,6 +163,7 @@ def entry():
         ):
             do_task_list()
             do_task_reward()
+            do_clear_like()
         else:
             send_content += ">环境变量未配置\n"
         if Util.check_repo_secrets(

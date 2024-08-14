@@ -103,6 +103,17 @@ def play_task_data(task_type):
     return resp_json
 
 
+def records_list(page_size, record_type):
+    resp_json = HttpUtil.post_api_json(
+        "/records/getlist",
+        {
+            "pageSize": page_size,
+            "type": record_type,
+        }
+    )
+    return resp_json
+
+
 def camp_get_task_list():
     resp_json = HttpUtil.post_api_native(
         "campGetTaskList",
