@@ -162,8 +162,8 @@ def entry():
                 ]
         ):
             do_task_list()
-            do_task_reward()
             do_clear_like()
+            do_task_reward()
         else:
             send_content += ">环境变量未配置\n"
         if Util.check_repo_secrets(
