@@ -48,7 +48,8 @@
     Desc: 
         消息推送
     Secrets:
-        pushplus_token
+        pushplus_token(已废弃)
+        serverchan_token
    
     Name: 和平营地
     Desc: 
